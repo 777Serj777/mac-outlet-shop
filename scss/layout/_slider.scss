@@ -1,0 +1,102 @@
+.slider{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    
+    %btn{
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        border: 2px solid rgba($color: #645c5c, $alpha: 1.0);
+        z-index: 2;
+        cursor: pointer;
+    }
+
+    &__next{
+        @extend%btn;
+        right: 0;   
+    }
+    &__prev{
+        @extend%btn;
+        left: 0;
+    }
+
+    &__container{
+        display: flex;
+        width: 100%;
+        height: 100%;
+    }
+
+    &__item{
+        visibility: hidden;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      
+        
+        &.next{
+            z-index: 1;
+            visibility: visible;
+            animation: moveNext .5s ease-in;
+        }
+        &.prev{
+            z-index: 1;
+            visibility: visible;
+            animation: movePrev .5s ease-in;
+        }
+
+        @keyframes moveNext {
+            0%{
+                right: 100%;
+            }
+            100%{
+                right: 0;
+            }
+        }
+        @keyframes movePrev {
+            0%{
+                left:  100%;
+            }
+            100%{
+                left: 0;
+            }
+        }
+    }
+    .active{
+        visibility: visible;  
+    
+    }
+
+    .active__left{
+        animation: activeLeft .5s ease-in;
+        visibility: visible; 
+      
+    }
+    .active__right{ 
+        animation: activeRight .5s ease-in;
+        visibility: visible; 
+    }
+
+    @keyframes activeLeft {
+        0%{
+            right: 0;
+        }
+        100%{
+            right: 100%;
+        }
+    }
+    @keyframes activeRight {
+        0%{
+            left: 0;
+        }
+        100%{
+            left: 100%;
+        }
+    }
+
+
+}
