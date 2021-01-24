@@ -1,4 +1,4 @@
-const items = [
+  const items = [
     {
         id: 1,
         category: 'mac',
