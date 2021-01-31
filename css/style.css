@@ -1,3 +1,39 @@
+.main .card .device__btn, .modal-window__btn {
+  width: 100%;
+  height: 100%;
+  max-width: 15rem;
+  max-height: 5rem;
+  background-color: #0E49B5;
+  color: #fff;
+  border-radius: 0.5rem;
+  border: none;
+  font-size: 2rem;
+  outline: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in;
+}
+.main .card .device__btn:hover, .modal-window__btn:hover {
+  background-color: #102243;
+}
+.main .card .device__btn::first-letter, .modal-window__btn::first-letter {
+  text-transform: uppercase;
+}
+
+.main .search__filter, .main .search__sort {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  max-width: 4rem;
+  max-height: 4rem;
+  border-radius: 50%;
+  right: 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in;
+}
+.main .search__filter:hover, .main .search__sort:hover {
+  background-color: #102243;
+}
+
 .slider {
   position: relative;
   width: 100%;
@@ -101,7 +137,9 @@ body {
   font-family: "Roboto", sans-serif;
   position: relative;
 }
-body .wrap {
+
+.wrap {
+  display: none;
   z-index: 2;
   position: absolute;
   left: 0;
@@ -111,33 +149,77 @@ body .wrap {
   background: rgba(0, 0, 0, 0.65);
   cursor: pointer;
 }
-body .wrap .modal-window {
-  display: flex;
+.wrap .modal-window {
   margin: 0 auto;
-  max-width: 103.7rem;
+}
+
+.modal-window {
+  display: flex;
+  min-width: 103.7rem;
   min-height: 49.1rem;
   background-color: #fff;
+  position: fixed;
+  top: calc(50% - 24.05rem);
   cursor: auto;
 }
-body .wrap .modal-window__column {
+.modal-window__reviews {
+  min-height: 8.6rem;
+  margin-bottom: 2.9rem;
+}
+.modal-window__column {
   display: flex;
   flex-direction: column;
   align-items: center;
   flex: 1;
 }
-body .wrap .modal-window__left {
+.modal-window__img {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-body .wrap .modal-window__left img {
+.modal-window__img img {
   max-width: 25rem;
   min-height: 25rem;
 }
-body .wrap .modal-window__center {
+.modal-window__wrap {
+  display: flex;
+  flex-direction: column;
+}
+.modal-window__data {
   min-width: 44rem;
   border-left: 1px solid #E2E2E2;
   border-right: 1px solid #E2E2E2;
+}
+.modal-window__title {
+  color: #3B3E66;
+  font-size: 2.4rem;
+  margin: 3.5rem 0 2.1rem 0;
+}
+.modal-window__info {
+  list-style: none;
+  font-size: 1.4rem;
+}
+.modal-window__info span {
+  color: #767272;
+}
+.modal-window__item:not(:last-child) {
+  margin-bottom: 1.5rem;
+}
+.modal-window__buy {
+  justify-content: center;
+}
+.modal-window__price {
+  font-size: 3.6rem;
+  font-weight: 700;
+  color: #3B3E66;
+}
+.modal-window__amount {
+  font-size: 1.8rem;
+  color: #3B3E66;
+  margin: 2.3rem 0 3.1rem 0;
+}
+.modal-window__amount span {
+  font-weight: 700;
 }
 .row {
   max-width: 102.4rem;
@@ -184,13 +266,19 @@ body .wrap .modal-window__center {
 .reviews__orders {
   display: flex;
   flex-direction: column;
+  text-align: center;
   font-size: 1.4rem;
   padding-right: 2.3rem;
+  color: #3B3E66;
 }
 .reviews__orders-count {
-  color: #3B3E66;
   font-weight: 700;
   margin-bottom: 0.6rem;
+}
+
+.opened {
+  display: flex;
+  justify-content: center;
 }
 
 .header__content {
@@ -244,26 +332,6 @@ body .wrap .modal-window__center {
   display: flex;
   margin-top: 4rem;
 }
-.main .card .device__btn {
-  width: 100%;
-  height: 100%;
-  max-width: 15rem;
-  max-height: 5rem;
-  background-color: #0E49B5;
-  color: #fff;
-  border-radius: 0.5rem;
-  border: none;
-  font-size: 2rem;
-  outline: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease-in;
-}
-.main .card .device__btn:hover {
-  background-color: #102243;
-}
-.main .card .device__btn::first-letter {
-  text-transform: uppercase;
-}
 .main .slider__wrap {
   height: 100%;
   height: 52rem;
@@ -300,20 +368,6 @@ body .wrap .modal-window__center {
   font-family: "Roboto", sans-serif;
   font-size: 1.8rem;
   font-weight: 400;
-}
-.main .search .search__filter, .main .search .search__sort {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  max-width: 4rem;
-  max-height: 4rem;
-  border-radius: 50%;
-  right: 0;
-  cursor: pointer;
-  transition: background-color 0.3s ease-in;
-}
-.main .search .search__filter:hover, .main .search .search__sort:hover {
-  background-color: #102243;
 }
 .main .search__sort {
   margin-right: 0.914rem;
@@ -411,51 +465,8 @@ body .wrap .modal-window__center {
 .main .card .device__price-number {
   font-weight: 700;
 }
-.main .card .device__reviews {
-  display: flex;
-  justify-content: space-between;
-  height: 100%;
-  max-height: 8.6rem;
-  align-items: center;
-  background-color: #DAE2EA;
-}
-.main .card .device__positive {
-  position: relative;
-  font-size: 1.4rem;
-  color: #3B3E66;
-  text-align: left;
-  padding-left: 4.4rem;
-}
-.main .card .device__positive::before {
-  display: block;
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  max-width: 2rem;
-  max-height: 2rem;
-  background-image: url("../img/icons/like_filled.svg");
-  background-repeat: no-repeat;
-  background-position: center;
-  left: 0;
-  margin-left: 1.467rem;
-}
-.main .card .device__positive > p:first-of-type {
-  margin-bottom: 0.6rem;
-}
-.main .card .device__positive-percent {
-  font-weight: 700;
-}
-.main .card .device__orders {
-  display: flex;
-  flex-direction: column;
-  font-size: 1.4rem;
-  padding-right: 2.3rem;
-}
-.main .card .device__orders-count {
-  color: #3B3E66;
-  font-weight: 700;
-  margin-bottom: 0.6rem;
+.main .card .device .reviews {
+  border-radius: 0;
 }
 .main .gagets {
   width: 100%;

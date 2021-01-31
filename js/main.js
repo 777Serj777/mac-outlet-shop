@@ -1,4 +1,47 @@
+const patterReviews = {
 
+    elemName: 'div',
+    className: 'reviews',
+
+    listChild: [
+        {
+            elemName: 'div',
+            className: 'reviews__positive',
+        
+            listChild: [
+                {
+                    elemName: 'p',
+                    textAfter: 'Positive reviews',
+                
+                    listChild: [
+                        {
+                            elemName: 'span',
+                            className: 'reviews__positive-percent'
+                        }
+                    ]
+                },
+            
+                {
+                    elemName: 'p',
+                    textAfter: 'Above avarage'
+                }
+            ]
+        },
+    
+        {
+            elemName: 'p',
+            className: 'reviews__orders',
+            textAfter: 'orders',
+        
+            listChild: [
+                {
+                    elemName: 'span',
+                    className: 'reviews__orders-count'
+                }
+            ]
+        }       
+    ]
+}
 const patternCard = 
 
     {
@@ -71,53 +114,15 @@ const patternCard =
                     },
 
                     {
-                    elemName: 'div',
-                    className: 'device__reviews',
+                        elemName: 'div',
+                        className: 'device__reviews reviews',
 
-                    listChild: [
-                        {
-                            elemName: 'div',
-                            className: 'device__positive',
-                        
-                            listChild: [
-                                {
-                                    elemName: 'p',
-                                    textAfter: 'positive reviews',
-                                
-                                    listChild: [
-                                        {
-                                            elemName: 'span',
-                                            className: 'device__positive-percent'
-                                        }
-                                    ]
-                                },
-
-                                {
-                                    elemName: 'p',
-                                    textAfter: 'above avarage'
-                                }
-                            ]
-                        },
-
-                        {
-                            elemName: 'p',
-                            className: 'device__orders',
-                            textAfter: 'order',
-                        
-                            listChild: [
-                                {
-                                    elemName: 'span',
-                                    className: 'device__orders-count'
-                                }
-                            ]
-                        }       
-                    ]
-                    }
+                        listChild :  patterReviews.listChild
+                    } 
                 ]
             }  
         ]  
 };
-
 const patternFilter = 
 {
     
@@ -132,6 +137,83 @@ const patternFilter =
     ]
     
 };
+const patternModalWindow = {
+
+    elemName: 'div',
+    className: 'modal-window',
+
+    listChild: [
+        {
+            elemName: 'div',
+            className: 'modal-window__img modal-window__column',
+            
+            listChild: [
+                {
+                    elemName: 'img'
+                }
+            ]
+        },
+        {
+            elemName: 'div',
+            className: 'modal-window__data modal-window__column',
+            
+            listChild: [
+                {
+                    elemName: 'div',
+                    className: 'modal-window__wrap',
+
+                    listChild: [
+                        {
+                            elemName: 'h2',
+                            className: 'modal-window__title'
+                        },
+                        {
+                            elemName: 'div',
+                            className: 'modal-window__reviews reviews',
+
+                            listChild: patterReviews.listChild                                                      
+                        },
+                        {
+                            elemName: 'ul',
+                            className: 'modal-window__info'
+                        }
+
+                    ]
+                }
+            ]
+        },
+        {
+            elemName: 'div',
+            className: 'modal-window__buy modal-window__column',
+            
+            listChild: [
+                {
+                    elemName: 'p',
+                    className: 'modal-window__price'
+                },
+                {
+                    elemName: 'p',
+                    className: 'modal-window__amount',
+                    textBefore: 'Stock: ',
+                    textAfter: ' pcs.',
+
+                    listChild: [
+                        {
+                            elemName: 'span',
+                            className: 'modal-window__stock'
+                        }
+                    ]
+                },
+                {
+                    elemName: 'button',
+                    className: 'modal-window__btn',
+                    textAfter: 'add to cart'
+                }
+            ]
+        }
+    ]
+
+}
 
 class Utils {
 
@@ -205,31 +287,28 @@ class Elem {
                 listElem[title] = item;
                 continue;
             };
-
+          
             let arrClassName = item.className.split(' ');
-
-            for (const listClassName of arrClassName) {
-                
+           
                 let reg = /[-_]/g;
           
-                let key = listClassName.split('__');
+                let key = arrClassName[0].split('__');
              
                 key = (key.length > 1) ? key.reduce((prevVelue, nextVelue) => {
                 
                     return prevVelue + (nextVelue[0].toUpperCase() + nextVelue.slice(1));
                 
                 }) : key[0];
-
-              
+        
                 key = key.split(reg);
               
                 key = (key.length>1) ? key[0] + key[1][0].toUpperCase() + key[1].slice(1)  : key[0];
             
                 listElem[key] = item;
-            }  
+            
 
         }
-
+  
         return listElem;
     }
 
@@ -257,7 +336,7 @@ class Elem {
                    element.appendChild(addElem(item));
                });   
            }
-           pattern.textBefore && element.prepend(pattern.textAfter);
+           pattern.textBefore && element.prepend(pattern.textBefore);
         
            pattern.textAfter && element.append(pattern.textAfter);
 
@@ -348,18 +427,56 @@ class Filter extends Elem{
         elements.filterTitle.append(range.title);
        
         ['from', 'to'].forEach(item => {
+
+            let from = +range.variants[0];
+            let to = +range.variants[range.variants.length - 1];
+
+            (item === 'from') && range.changed.push(from); 
+            (item === 'to') && range.changed.push(to); 
+
             rangeFilter = new Elem(patternRange).listElem;
             rangeFilter.label.htmlFor = 'text';
             rangeFilter.label.innerText = item;
             rangeFilter.input.type = 'text';
-            elements.filterWrap.appendChild(rangeFilter.filterInput)
+            rangeFilter.input.value = (item === 'from') ? from : to; 
+            
+            rangeFilter.input.addEventListener('input', (e) => {
+           
+                let text = e.target.value;
+                let reg = /^\d+$/;
+
+                if(!reg.test(text)){
+                    e.target.value = text.slice(0, text.length - 1);
+                }     
+            });
+
+            rangeFilter.input.addEventListener('keyup', (e) => {
+           
+                if(!(e.key === 'Enter' || e.keyCode === 13) || (e.target.value === '')) return;
+
+                let value = +e.target.value;
+                let index = +(item === 'to');
+          
+                if(value >= from && value <= to){
+                    range.changed[index] = value;
+                }
+                else{
+                    range.changed[index] = (!index) ? from : to;
+                    e.target.value = range.changed[index];
+                }
+                            
+                this.renderItemWithFilter() 
+            });
+
+            elements.filterWrap.appendChild(rangeFilter.filterInput);
+
         });
 
         elements.filterTitle.addEventListener('click', (e) => {
             e.target.classList.toggle('arrow__open');
             e.target.classList.toggle('arrow__close');
         });
-
+ 
         return elements.filterContainer;
     }
 
@@ -463,7 +580,7 @@ class Filter extends Elem{
         arrCheck.forEach(item => {
             this.listElem.filter.appendChild(item.filterContainer);
         });
-
+       
         wrap.appendChild(this.listElem.filter)
      
     }
@@ -475,27 +592,28 @@ class Filter extends Elem{
         })
         let listFilter = {};
 
-        let regex = /\d./g;
+        let regex = /^[a-z\sA-Z]+$/;
 
         arrFilters.forEach(item => {
-                      
+                         
             listFilter[item.title] = item.changed.map(item =>{
-                                 
-              return (regex.test(item)) ? +item.match(regex) : item;
+             
+              return (regex.test(item) || typeof item === 'number') ? item : +item.match(/\d+/);
              
             }); 
-                      
+              console.log(listFilter);
         });
        
         let  filteredItems = items.filter(item => {
-
+ 
             for (const key in listFilter) {
-
+             
               let category =  item[key] instanceof Array ?  item[key] : [item[key]]              
               let result; 
-
-                for (const value of category) {            
-                    result = listFilter[key].includes(value);                   
+               
+                for (const value of category) {   
+                                 
+                    result = (key !== 'price') ? listFilter[key].includes(value) : value >= listFilter[key][0] && value <= listFilter[key][1];                                 
                     if(result) break;              
                 }
 
@@ -526,11 +644,15 @@ class Card extends Elem{
         this.listElem.deviceTitle.append(this.#item.name);
         this.listElem.devicePriceNumber.append(this.#item.price);
         this.listElem.deviceCountNumber.append(this.#item.amount);
-        this.listElem.deviceOrdersCount.append(this.#item.orders);
-        this.listElem.devicePositivePercent.append(~~(this.#item.like/this.#item.orders * 100)+"% ");
+        this.listElem.reviewsOrdersCount.append(this.#item.orders);
+        this.listElem.reviewsPositivePercent.append(~~(this.#item.like/this.#item.orders * 100)+"% ");
+
+        this.listElem.card.addEventListener('click', () => {
+            new modalWindow().renderModalWindow('wrap', this.#item);
+        })
 
         container.append(this.listElem.card) 
-        
+      
     }
 
 }
@@ -568,8 +690,134 @@ class ListCards {
 
 }
 
+class modalWindow extends Elem{
+
+    constructor(){
+        super(patternModalWindow);
+    }
+
+    renderModalWindow(container, item){
+
+    const patternInfoItem = {
+        elemName: 'li',
+        className: 'modal-window__item',
+
+        listChild: [
+            {
+                elemName: 'span',
+                className: 'modal-window__name'
+            }
+        ]
+    }
+
+    let  {
+            like,
+            orders,
+            name,
+            imgUrl,
+            amount,
+            price,
+            color,
+
+            chip: {
+                name : chip
+            },
+
+            size: {
+
+                height,
+                width,
+                depth,
+                weight,
+            } 
+
+        } = item;
+
+        let infoDevice = {
+            chip,
+            color,
+            height,
+            width,
+            depth,
+            weight,
+        } 
+    
+        container = (typeof container === 'object') ? container : document.querySelector('.' + container);
+
+
+        container.innerHTML = "";
+
+        this.listElem.img.src = `../img/${imgUrl}`;
+        this.listElem.modalWindowPrice.append("$ " + price);
+        this.listElem.modalWindowStock.append( + amount);
+        this.listElem.modalWindowTitle.append(name);
+        this.listElem.reviewsOrdersCount.append(orders)
+        this.listElem.reviewsPositivePercent.append(~~(like/orders * 100)+"% ")
+
+        for (const key in infoDevice) {
+           
+            if(!infoDevice[key]) continue;
+
+            let itemInfo = new Elem(patternInfoItem);
+
+            if(infoDevice[key] instanceof Array){
+
+                itemInfo.listElem.modalWindowName.append((key[0].toUpperCase() + key.slice(1) + ": "));
+
+                let value = "";
+                
+                infoDevice[key].forEach((item, index, arr) => {
+
+                    if(index >= arr.length-1){
+                        value += item;
+                        return;
+                    }
+                    value += item + ", "
+               
+                });
+
+                itemInfo.listElem.modalWindowItem.append(value);
+             
+            }          
+            else{
+                itemInfo.listElem.modalWindowName.append((key[0].toUpperCase() + key.slice(1) + ": ") );
+                itemInfo.listElem.modalWindowItem.append(infoDevice[key]);
+      
+            }
+          
+            this.listElem.modalWindowInfo.append(itemInfo.listElem.modalWindowItem);
+            
+            
+        }
+        
+        let closeModalWindow = (e) => {
+            if(e.target !== container) return;
+            container.classList.toggle('opened'); 
+            container.removeEventListener('click', closeModalWindow);         
+        }
+
+        container.append(this.listElem.modalWindow);
+        container.classList.toggle('opened');
+        container.addEventListener('click', closeModalWindow);
+
+    }
+
+
+
+}
+
 new ListCards(items).renderCard('list-device');
 const filter = new Filter();
+
+
+
+
+
+
+
+
+
+
 
 
 
