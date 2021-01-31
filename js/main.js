@@ -747,7 +747,7 @@ class modalWindow extends Elem{
 
         container.innerHTML = "";
 
-        this.listElem.img.src = `../img/${imgUrl}`;
+        this.listElem.img.src = `img/${imgUrl}`;
         this.listElem.modalWindowPrice.append("$ " + price);
         this.listElem.modalWindowStock.append( + amount);
         this.listElem.modalWindowTitle.append(name);
