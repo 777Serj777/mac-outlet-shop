@@ -13,7 +13,7 @@ body{
 }
 .wrap{
     display: none;
-    z-index: 2;
+    z-index: 4;
     position: absolute;
     left: 0;
     right: 0;
@@ -168,4 +168,183 @@ body{
     display: flex;
     justify-content: center;
  
+}
+.show-cart{
+    display: block;
+}
+.hidden-cart{
+    display: none;
+}
+.cart{
+    position: absolute;
+    top: 5rem;
+    right: 0;
+}
+.list-cart{
+    z-index: 3;
+    background-color: #fff;
+    min-width: 43.5rem;
+    text-align: center;
+    border-radius: .5rem;
+    border: .1rem solid #E2E2E2;
+    cursor: auto;
+
+    filter: drop-shadow(0rem 0rem 2.5rem rgba(0, 0, 0, 0.25));
+
+    &__title{
+        font-size: 2.4rem;
+        margin: 2.4rem 0 .7rem 0;
+    }
+    &__text{
+        font-size: 1.6rem;
+        color: $color-text-first;
+        margin-bottom: 3.6rem;
+    }
+    &__wrap-items{
+        border-top: .05rem solid #C4C4C4;
+        border-bottom: .05rem solid #C4C4C4;
+    }
+    &__item{
+        display: flex;
+        align-items: center;
+        padding: 1.2rem 0 1.2rem 2.6rem;
+        &:not(:last-of-type){
+            border-bottom: .05rem solid #C4C4C4;
+        }
+
+    }
+    &__container{
+        margin-left: .8rem;
+    }
+    &__device{
+        min-height: 10rem;
+        display: flex;
+        align-items: center;
+    }
+    &__img{
+        max-width: 10rem;
+    }
+    &__name{
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+    }
+    &__cost{
+        max-width: 4.5rem;
+        color: #4191FF;
+        background-color: #EAF6FF;
+        border-radius: .3rem;
+        padding: .2rem 0;
+    }
+    &__wrap-count{
+        display: flex;
+        align-items: center;
+        margin-left: auto;
+    }
+    &__count{
+  
+        font-size: 2rem;
+        color: #4191FF;
+        font-weight: 700;
+        margin: 0 1.5rem 0 1.5rem
+        
+    }
+    & .not-active{
+        background-color: #C4C4C4;
+    }
+    &__del{
+        @extend%primeBtn;
+        position: relative;
+        width: 2rem;
+        height: 2rem;
+        
+   
+        &::before{
+            position: absolute;
+            display: block;
+            content: "";
+            width: 50%;
+            height: 50%;
+            border: .2rem solid #fff;
+            top: 50%;
+            transform: translate(75%, -50%) rotate(45deg);
+            box-sizing: border-box;   
+            border-top-color: transparent;     
+            border-right-color: transparent;     
+        }
+    }
+    &__add{
+        @extend%primeBtn;
+        position: relative;
+        width: 2rem;
+        height: 2rem;
+
+        &::before{
+            position: absolute;
+            display: block;
+            content: "";
+            width: 50%;
+            height: 50%;
+            border: .2rem solid #fff;
+            top: 50%;
+            transform: translate(25%, -50%) rotate(45deg);
+            box-sizing: border-box;   
+            border-bottom-color: transparent;     
+            border-left-color: transparent;     
+        }
+    }
+    &__btn-remove{
+        position: relative;
+        width: 2rem;
+        height: 2rem;
+        background: rgba(248, 50, 69, 0.15);
+        border: none;
+        border-radius: .2rem;
+        margin: 0 3.4rem 0 2.5rem;
+        cursor: pointer;
+        outline: none;
+
+        &::before{
+            position: absolute;
+            display: block;
+            content: "";
+            width: .15rem;
+            height: 75%;
+            background-color: #F83245;
+            top: 50%;
+            right: 50%;
+            transform: translate(50%, -50%) rotate(-25deg);
+
+        }
+        &::after{
+            position: absolute;
+            display: block;
+            content: "";
+            width: .15rem;
+            height: 75%;
+            background-color: #F83245;
+            top: 50%;
+            right: 50%;
+            transform: translate(50%, -50%) rotate(25deg);
+        }
+    }
+    &__btn-buy{
+        @extend%primeBtn;
+        min-width: 25rem;
+        min-height: 4.8rem;
+        margin: 1.9rem 0 2.2rem 0;
+    }
+    &__total{
+        display: flex;
+        min-height: 4.9rem;
+        justify-content: space-around;
+        align-items: center;
+        background-color: #EAF6FF;
+        font-size: 1.2rem;
+        color: $color-text-first;
+
+        span{
+            font-weight: 700;
+            color: #000;
+        }
+    }
 }

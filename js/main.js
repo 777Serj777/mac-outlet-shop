@@ -122,7 +122,7 @@ const patternCard =
                 ]
             }  
         ]  
-};
+}
 const patternFilter = 
 {
     
@@ -136,7 +136,7 @@ const patternFilter =
         }
     ]
     
-};
+}
 const patternModalWindow = {
 
     elemName: 'div',
@@ -214,6 +214,64 @@ const patternModalWindow = {
     ]
 
 }
+const patternCart = {
+
+    elemName: 'div',
+    className: 'list-cart',
+
+    listChild: [
+        {   // title
+            elemName: 'h3',
+            className: 'list-cart__title',
+            textAfter: 'Shopping Cart'
+        },
+        {   // text
+            elemName: 'p',
+            className: 'list-cart__text',
+            textAfter: 'Checkout is almost done!'
+        },
+        {   // list device
+            elemName: 'ul',
+            className: 'list-cart__wrap-items',
+        },
+        {   // total price & amount
+            elemName: 'div',
+            className: 'list-cart__total',
+
+            listChild: [
+                {
+                    elemName: 'p',
+                    className: 'list-cart__amount',
+                    textBefore: 'Total amount: ',
+
+                    listChild: [
+                        {
+                            elemName: 'span',
+                            textAfter: '0 ptc'
+                        }
+                    ]
+                },
+                {
+                    elemName: 'p',
+                    className: 'list-cart__price',
+                    textBefore: 'Total price: ',
+
+                    listChild: [
+                        {
+                            elemName: 'span',
+                            textAfter: '0$'
+                        }
+                    ]
+                }
+            ]
+        },
+        {   // button
+            elemName: 'button',
+            className: 'list-cart__btn-buy',
+            textAfter: 'buy'
+        }
+    ]
+}
 
 class Utils {
 
@@ -290,23 +348,18 @@ class Elem {
           
             let arrClassName = item.className.split(' ');
            
-                let reg = /[-_]/g;
-          
-                let key = arrClassName[0].split('__');
-             
-                key = (key.length > 1) ? key.reduce((prevVelue, nextVelue) => {
-                
-                    return prevVelue + (nextVelue[0].toUpperCase() + nextVelue.slice(1));
-                
-                }) : key[0];
+            let reg = /[-_]+/g;
         
-                key = key.split(reg);
-              
-                key = (key.length>1) ? key[0] + key[1][0].toUpperCase() + key[1].slice(1)  : key[0];
+            let key = arrClassName[0].split(reg);
             
-                listElem[key] = item;
+            key = (key.length > 1) ? key.reduce((prevVelue, nextVelue) => {
             
-
+                return prevVelue + (nextVelue[0].toUpperCase() + nextVelue.slice(1));
+            
+            }) : key[0];
+            
+            listElem[key] = item;
+            
         }
   
         return listElem;
@@ -601,7 +654,7 @@ class Filter extends Elem{
               return (regex.test(item) || typeof item === 'number') ? item : +item.match(/\d+/);
              
             }); 
-              console.log(listFilter);
+            
         });
        
         let  filteredItems = items.filter(item => {
@@ -647,9 +700,15 @@ class Card extends Elem{
         this.listElem.reviewsOrdersCount.append(this.#item.orders);
         this.listElem.reviewsPositivePercent.append(~~(this.#item.like/this.#item.orders * 100)+"% ");
 
-        this.listElem.card.addEventListener('click', () => {
+        this.listElem.card.addEventListener('click', (e) => {
             new modalWindow().renderModalWindow('wrap', this.#item);
         })
+
+        this.listElem.deviceBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            cart._addToCart(this.#item);
+          
+        });
 
         container.append(this.listElem.card) 
       
@@ -685,7 +744,6 @@ class ListCards {
            element.renderCard(container);
        });
 
-       
     }
 
 }
@@ -802,12 +860,239 @@ class modalWindow extends Elem{
 
     }
 
-
-
 }
 
+class Cart extends Elem {
+
+    #gagets = [];
+
+    constructor(){
+        super(patternCart);
+        this.basket = document.querySelector('.basket');
+        this.cart = document.querySelector('.basket .cart');
+
+        this.basket.addEventListener('click', (e) => {
+        
+            if(e.target.className.includes('list-cart')) return;
+
+            this.cart.classList.toggle('hidden-cart'); 
+            this.cart.classList.toggle('show-cart'); 
+        });
+        
+        this.renderCart();
+    }
+
+    get _getGagets(){
+        return this.#gagets;
+    }
+    _removeItemFromCart(id){
+        this.#gagets = this.#gagets.filter(item => item.id !== id);
+    }
+    _addToCart(device){
+        
+        let {
+            id,
+            imgUrl,
+            name,
+            price,
+            amount,
+        } = device
+ 
+        for (const gaget of this.#gagets) {
+
+            if(gaget.id === id){
+
+                if (gaget.count === 4) return;
+
+                gaget.count++;
+                this.renderCart();
+                return;
+            }   
+        }
+   
+        this.#gagets.push({
+            id,
+            imgUrl,
+            name,
+            price,
+            amount,
+            count: 1
+        });
+
+        this.renderCart();
+    }
+
+    addDeviceToCart(){
+
+        const patterDevice = {
+
+            elemName: 'li',
+            className: 'list-cart__item',
+
+            listChild: [
+                {
+                    elemName: 'div',
+                    className: 'list-cart__device',
+
+                    listChild: [
+
+                        {
+                            elemName: 'img',
+                            className: 'list-cart__img'
+                        },
+
+                        {
+                            elemName: 'div',
+                            className: 'list-cart__container',
+
+                            listChild: [
+                                {
+                                    elemName: 'h4',
+                                    className: 'list-cart__name'
+                                },
+
+                                {
+                                    elemName: 'p',
+                                    className: 'list-cart__cost'
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    elemName: 'div',
+                    className: 'list-cart__wrap-count',
+
+                    listChild: [
+                        {
+                            elemName: 'button',
+                            className: 'list-cart__del not-active'
+                        },
+                        {
+                            elemName: 'span',
+                            className: 'list-cart__count'
+                        },
+                        {
+                            elemName: 'button',
+                            className: 'list-cart__add'
+                        }
+                    ]
+                },
+                {
+                    elemName: 'button',
+                    className: 'list-cart__btn-remove'
+                }
+
+            ]
+        } 
+    
+        this.listElem.listCartWrapItems.innerHTML = "";
+
+        this.#gagets.forEach(item => {
+
+            let device = new Elem(patterDevice);
+
+            device.listElem.listCartImg.src = `img/${item.imgUrl}`;
+            device.listElem.listCartName.append(item.name);
+            device.listElem.listCartCost.append(item.price + '$');
+            device.listElem.listCartCount.append(item.count);
+
+
+            switch(item.count){
+                case 1: {
+                    device.listElem.listCartDel.classList.add('not-active');
+                    device.listElem.listCartAdd.classList.remove('not-active');
+                    break;
+                }
+                case 4: {
+                    device.listElem.listCartAdd.classList.add('not-active');
+                    device.listElem.listCartDel.classList.remove('not-active');
+                    break;
+                }
+                default: {
+                    device.listElem.listCartAdd.classList.remove('not-active');
+                    device.listElem.listCartDel.classList.remove('not-active');
+                    break;
+                }
+            }
+
+            this.listElem.listCartWrapItems.append(device.listElem.listCartItem);
+
+            device.listElem.listCartDel.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if(item.count > 1){
+                    item.count--;
+                    this.renderCart();                 
+                } 
+            });
+            device.listElem.listCartAdd.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if(item.count < 4){  
+                    item.count++;
+                    this.renderCart();
+                }
+                  
+            });
+            device.listElem.listCartBtnRemove.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.#gagets =  this.#gagets.filter(elem => elem.id !== item.id);
+                if(this.#gagets.length === 0) localStorage.clear();
+                this.renderCart();
+                
+            });
+
+        });
+
+    }
+
+    renderCart(){ 
+   
+        this.cart.innerHTML = "";
+        this.addDeviceToCart();
+        let countItems = this.#gagets.reduce((prevVelue, nextVelue) => prevVelue + nextVelue.count, 0);
+        let priceAll =   this.#gagets.reduce((prevVelue, nextVelue) => prevVelue + nextVelue.price * nextVelue.count, 0);
+
+        this.listElem.listCartAmount.children[0].innerText = countItems + ' ptc';
+        this.listElem.listCartPrice.children[0].innerText = priceAll + '$';
+
+        document.querySelector('.basket__count').innerText = countItems;
+        
+        this.cart.append(this.listElem.listCart);
+
+        this.workWithStorage();
+    }
+
+    workWithStorage(){
+  
+        if(this.#gagets.length > 0){
+
+            localStorage.clear();
+
+            this.#gagets.forEach((element, index) => {
+
+                let json = JSON.stringify(element)
+                localStorage.setItem(index, json);
+    
+            });
+        }
+        else if(localStorage.length > 0){
+            
+            for (let index = 0; index < localStorage.length; index++) {         
+               this.#gagets.push(JSON.parse(localStorage.getItem(index)));
+            }
+
+            this.renderCart();
+        }
+   
+    }
+}
+
+const cart = new Cart();
 new ListCards(items).renderCard('list-device');
 const filter = new Filter();
+
+
+
 
 
 

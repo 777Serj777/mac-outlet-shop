@@ -5,6 +5,13 @@
         align-items: center;
         justify-content: space-between;
         padding: .6rem 0 1.4rem 0;
+        position: relative;
+
+        .list-cart{
+            position: absolute;
+            top: 100%;
+            right: 0;
+        }
     }
 
     .logo{
@@ -12,7 +19,7 @@
     }
 
     .basket{
-        
+       
         display: flex;
         position: relative;
         width: 100%;
@@ -29,6 +36,7 @@
         &__img{
             width: 50%;
             height: 50%;
+     
         }
 
         &__count{
@@ -52,3 +60,4 @@
         }
     }
 }
+
