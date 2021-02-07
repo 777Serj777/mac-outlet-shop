@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MacOutlet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="row">
+           <div class="header__content">
+                <div class="logo"><a href="#"><img src="img/icons/logo.svg" alt="logo" class="logo__img"></a></div>
+                <div class="basket">
+                    <img src="img/icons/cart.svg" alt="cart" class="basket__img">
+                    <p class="basket__count">0</p>
+                </div>            
+           </div>
+        </div>
+
+    </header>
+    <main class="main">
+        <div class="row">
+            <div class="slider slider__wrap">
+            <div class="slider__container">
+                <div class="slider__item" style="background-image: url(img/banners/mac_book_banner.jpg)"></div>
+                <div class="slider__item" style="background-image: url(img/banners/airpods_pro_banner.png)"></div>
+                <div class="slider__item" style="background-image: url(img/banners/apple_tv_banner.png)"></div>
+                <div class="slider__item" style="background-image: url(img/banners/watch_banner.jpg)"></div>
+                <div class="slider__item" style="background-image: url(img/banners/iphone_12_banner.jpg)"></div>
+                <div class="slider__item active" style="background-image: url(img/banners/ipad_air_banner.jpg)"></div>
+            </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="search">
+                <form action="#" class="search__form">
+                    <input type="search" placeholder="Enter device name..." class="search__input">
+                    <div class="search__sort"></div>
+                    <div class="search__filter"></div>
+                </form>
+            </div>
+        </div>
+        <div class="row row__three">
+            <div class="column gagets"> 
+                <div class="list-device">
+                <div class="card">
+                    <div class="device">
+                        <div class="device__like"><img src="img/icons/like_empty.svg" alt="like"></div>
+                        <div class="device__img" style="background-image: url(img/items/apple-watch3.jpg)"></div>
+                        <div class="device__info">
+                            <h3 class="device__title">Apple Watch 4</h3>
+                            <p class="device__count device__count-zero"><span class="device__count-number">483</span> left in stock</p>
+                            <p class="device__price">Price: <span class="device__price-number">599</span> $</p>
+                            <button class="device__btn">add to cart</button>
+                        </div>
+                        <div class="device__reviews reviews">
+                            <div class="device__positive reviews__positive">
+                                <p><span class="device__positive-percent reviews__positive-percent">91%</span> Positive reviews</p>
+                                <p>Above avarage</p>
+                            </div>
+                            <p class="device__orders reviews__orders"><span class="device__orders-count reviews__orders-count">560</span> order</p>
+                        </div>
+                    </div>
+                </div>
+                </div> 
+            </div>     
+        </div>
+    </main>  
+</body>
+<script src="js/items.js"></script>
+<script src="js/slider.js"></script>
+<script src="js/main.js"></script>
+</html>
+
+
+
