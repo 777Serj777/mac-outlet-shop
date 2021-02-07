@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MacOutlet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="row">
+           <div class="header__content">
+                <div class="logo"><a href="#"><img src="img/icons/logo.svg" alt="logo" class="logo__img"></a></div>
+                <div class="basket">
+                    <img src="img/icons/cart.svg" alt="cart" class="basket__img">
+                    <p class="basket__count">0</p>
+                </div>            
+           </div>
+        </div>
+    </header>
+    <main class="main">
+        <div class="row">
+            <div class="slider slider__wrap">
+            <div class="slider__container">
+                <div class="slider__item" style="background-image: url(img/banners/mac_book_banner.jpg)"></div>
+                <div class="slider__item" style="background-image: url(img/banners/airpods_pro_banner.png)"></div>
+                <div class="slider__item" style="background-image: url(img/banners/apple_tv_banner.png)"></div>
+                <div class="slider__item" style="background-image: url(img/banners/watch_banner.jpg)"></div>
+                <div class="slider__item" style="background-image: url(img/banners/iphone_12_banner.jpg)"></div>
+                <div class="slider__item active" style="background-image: url(img/banners/ipad_air_banner.jpg)"></div>
+            </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="search">
+                <form action="#" class="search__form">
+                    <input type="search" placeholder="Enter device name..." class="search__input">
+                    <div class="search__sort"></div>
+                    <div class="search__filter"></div>
+                </form>
+            </div>
+        </div>
+        <div class="row row__three">
+            <div class="column">
+                <div class="filter">
+                    <form action="#" class="filter__form">
+                        <fieldset class="filter__container">                      
+                            <legend class="filter__title arrow__open">Prices</legend>
+                            <div class="filter__wrap">
+                                <p class="filter__input">
+                                    <label for="text">From</label>
+                                    <input type="text">
+                                </p>
+                                <p class="filter__input">
+                                    <label for="text">To</label>
+                                    <input type="text">
+                                </p>
+                            </div>          
+                        </fieldset>
+                        <fieldset class="filter__container">
+                            <legend class="filter__title arrow__open">Color</legend>
+                            <div class="filter__wrap">
+                                <p class="filter__checkbox">                          
+                                    <input id="red" type="checkbox">
+                                    <label for="red"></label>
+                                    Red
+                                </p>
+                                <p class="filter__checkbox">
+                                    <input id="black" type="checkbox">
+                                    <label for="black"></label>
+                                    Black
+                                </p>
+                                <p class="filter__checkbox"> 
+                                    <input id="green" type="checkbox">                        
+                                    <label for="green"></label>
+                                    Green
+                                </p>
+                                <p class="filter__checkbox">
+                                    <input id="white" type="checkbox">                         
+                                    <label for="white"></label>                           
+                                    White
+                                </p>
+                                <p class="filter__checkbox">                                                  
+                                    <input id="blue" type="checkbox">
+                                    <label for="blue"></label>
+                                    Blue
+                                </p>
+                                <p class="filter__checkbox">
+                                    <input id="grey" type="checkbox">                          
+                                    <label for="grey"></label>                          
+                                    Grey
+                                </p>
+                                <p class="filter__checkbox">                          
+                                    <input id="yellow" type="checkbox">
+                                    <label for="yellow"></label>
+                                    Yellow
+                                </p>
+                                <p class="filter__checkbox">
+                                    <input id="gold" type="checkbox">
+                                    <label for="gold"></label>
+                                    Gold
+                                </p>
+                            </div>
+                        </fieldset>
+                        <fieldset class="filter__container">
+                            <legend class="filter__title arrow__open">Memory</legend>
+                            <div class="filter__wrap">
+                                <p class="filter__checkbox">
+                                    <input id="32-GB" type="checkbox">
+                                    <label for="32-GB"></label>
+                                    32 GB
+                                </p>
+                                <p class="filter__checkbox">
+                                    <input id="64-GB" type="checkbox">
+                                    <label for="64-GB"></label>                             
+                                    64 GB
+                                </p>
+                                <p class="filter__checkbox">
+                                    <input id="128-GB" type="checkbox">
+                                    <label for="128-GB"></label>                        
+                                    128 GB
+                                </p>
+                                <p class="filter__checkbox">
+                                    <input id="256-GB" type="checkbox">
+                                    <label for="256-GB"></label>                               
+                                    256 GB
+                                </p>
+                                <p class="filter__checkbox">
+                                    <input id="512-GB" type="checkbox">
+                                    <label for="512-GB"></label>                               
+                                    512 GB
+                                </p>
+                                <p class="filter__checkbox">
+                                    <input id="1-TB" type="checkbox">
+                                    <label for="1-TB"></label>                               
+                                    1 TB
+                                </p>
+                                <p class="filter__checkbox">
+                                    <input id="2-TB" type="checkbox">
+                                    <label for="2-TB"></label>                               
+                                    2 TB
+                                </p>
+                                <p class="filter__checkbox">
+                                    <input id="4-TB" type="checkbox">
+                                    <label for="4-TB"></label>                               
+                                    4 TB
+                                </p>
+                            </div>
+                        </fieldset>
+                        <fieldset class="filter__container">
+                            <legend class="filter__title arrow__open">OS</legend>
+                            <div class="filter__wrap">
+                                <p class="filter__checkbox">                           
+                                    <input id="IOS" type="checkbox">
+                                    <label for="IOS"></label>
+                                    IOS
+                                </p>
+                                <p class="filter__checkbox">                               
+                                    <input id="Mac-OS" type="checkbox">
+                                    <label for="Mac-OS"></label>
+                                    Mac OS
+                                </p>
+                                <p class="filter__checkbox">
+                                    <input id="tvOS" type="checkbox">
+                                    <label for="tvOS"></label>                           
+                                    tvOS
+                                </p>
+                                <p class="filter__checkbox">
+                                    <input id="Watch-OS" type="checkbox">
+                                    <label for="Watch-OS"></label>                               
+                                    Watch OS
+                                </p>
+                            </div>
+                        </fieldset>
+                        <fieldset class="filter__container">
+                            <legend class="filter__title arrow__open">Display</legend>
+                            <div class="filter__wrap">
+                                <p class="filter__checkbox">                         
+                                    <input id="2-5-inch" type="checkbox">
+                                    <label for="2-5-inch"></label>
+                                    2 - 5 inch
+                                </p>
+                                <p class="filter__checkbox">
+                                    <input id="5-7-inch" type="checkbox">
+                                    <label for="5-7-inch"></label>                              
+                                    5 - 7 inch
+                                </p>
+                                <p class="filter__checkbox">                                
+                                    <input id="7-12-inch" type="checkbox">
+                                    <label for="7-12-inch"></label>
+                                    7 - 12 inch
+                                </p>
+                                <p class="filter__checkbox">                                
+                                    <input id="12-16-inch" type="checkbox">
+                                    <label for="12-16-inch"></label>
+                                    12 - 16 inch
+                                </p>
+                                <p class="filter__checkbox">
+                                    <input id="+16-inch" type="checkbox">
+                                    <label for="+16-inch"></label>                            
+                                    +16 inch
+                                </p>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+            <div class="column gagets"> 
+                <div class="list-device">
+                <div class="card">
+                    <div class="device">
+                        <div class="device__like"><img src="img/icons/like_empty.svg" alt="like"></div>
+                        <div class="device__img" style="background-image: url(img/items/apple-watch3.jpg)"></div>
+                        <div class="device__info">
+                            <h3 class="device__title">Apple Watch 4</h3>
+                            <p class="device__count device__count-zero"><span class="device__count-number">483</span> left in stock</p>
+                            <p class="device__price">Price: <span class="device__price-number">599</span> $</p>
+                            <button class="device__btn">add to cart</button>
+                        </div>
+                        <div class="device__reviews reviews">
+                            <div class="device__positive reviews__positive">
+                                <p><span class="device__positive-percent reviews__positive-percent">91%</span> Positive reviews</p>
+                                <p>Above avarage</p>
+                            </div>
+                            <p class="device__orders reviews__orders"><span class="device__orders-count reviews__orders-count">560</span> order</p>
+                        </div>
+                    </div>
+                </div>
+                </div> 
+            </div>     
+        </div>
+    </main>  
+    <div class="wrap ">
+        <div class="modal-window">
+            <div class="modal-window__column modal-window__img"><img src="img/items/apple-tv.jpeg" alt=""></div>
+            <div class="modal-window__column modal-window__data">
+               <div class="modal-window__wrap">
+                    <h2 class="modal-window__title">Apple TV Gen. 4 2020</h2>
+                    <div class="modal-window__reviews reviews">
+                        <div class="reviews__positive">
+                            <p><span class="reviews__positive-percent">91%</span> Positive reviews</p>
+                            <p>Above avarage</p>
+                        </div>
+                        <p class="reviews__orders"><span class="reviews__orders-count">560</span> orders</p>
+                    </div>
+                    <ul class="modal-window__info">
+                        <li class="modal-window__item"><span class="modal-window__name">Color: </span>Black</li>
+                        <li class="modal-window__item"><span class="modal-window__name">Operating System: </span>tvOS</li>
+                        <li class="modal-window__item"><span class="modal-window__name">Chip: </span>A10X</li>
+                        <li class="modal-window__item"><span class="modal-window__name">Height: </span>3.5 cm</li>
+                        <li class="modal-window__item"><span class="modal-window__name">Width: </span>9.8 cm</li>
+                        <li class="modal-window__item"><span class="modal-window__name">Depth: </span>9.8 cm</li>
+                        <li class="modal-window__item"><span class="modal-window__name">Weight: </span>425 g</li>
+                    </ul>
+               </div>
+            </div>
+            <div class="modal-window__column modal-window__buy">
+                <p class="modal-window__price">$ 999,45</p>
+                <p class="modal-window__amount">Stock: <span class="modal-window__stock">45</span> pcs.</p>
+                <button class="modal-window__btn">Add to cart</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="js/items.js"></script>
+<script src="js/slider.js"></script>
+<script src="js/main.js"></script>
+</html>
+
+
+
